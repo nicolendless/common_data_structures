@@ -1,9 +1,13 @@
 """
 This file contains functions that resolve common problems with the use of Data Structures
 """
+from queue import Queue
 from stack import Stack
 
 
+"""
+STACK APPLICATIONS
+"""
 def pair_checker(symbol_string):
     """
     Returns True when the input string has balanced characters, that means for example "()()" is balanced but
@@ -57,4 +61,30 @@ def matches(open_symbol, close_symbol):
     opens = "([{"
     closes = ")]}"
     return opens.index(open_symbol) == closes.index(close_symbol)
+
+
+"""
+QUEUE APPLICATIONS
+"""
+def hot_potato(name_list, counter):
+    """
+    Simulate the hot potato game given a list of names and a counter which designates the time that
+    the potate will be passed. It will return the name of the last "potato holder".
+    :param name_list:
+    :param counter:
+    :return:
+    """
+    queue = Queue()
+    for name in name_list:
+        queue.enqueue(name)
+
+    while queue.size() > 1:
+        for i in range(counter):
+            queue.enqueue(queue.dequeue())
+
+        queue.dequeue()
+
+    return queue.dequeue()
+
+
 
